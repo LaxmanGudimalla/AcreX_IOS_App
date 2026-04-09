@@ -12,18 +12,18 @@ workflows:
         script: |
           npm install
 
-      - name: Clean iOS build
+      - name: Install CocoaPods properly
         script: |
           cd ios
-          rm -rf Pods Podfile.lock
-          pod install
+          pod install --repo-update
+          ls -la
           cd ..
 
       - name: Build iOS (Simulator)
         script: |
           cd ios
           xcodebuild \
-            -workspace TempApp.xcworkspace \
+            -workspace *.xcworkspace \
             -scheme TempApp \
             -configuration Debug \
             -sdk iphonesimulator \
