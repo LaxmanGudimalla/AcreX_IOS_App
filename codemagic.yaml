@@ -15,16 +15,16 @@ workflows:
       - name: Install CocoaPods properly
         script: |
           cd ios
+          sudo gem install cocoapods
           pod repo update
-          pod install --verbose
-          ls -la
+          pod install
           cd ..
 
-      - name: Build iOS (Simulator)
+      - name: Build iOS (no Metro)
         script: |
           cd ios
           xcodebuild \
-            -workspace TempApp.xcworkspace \
+            -project TempApp.xcodeproj \
             -scheme TempApp \
             -configuration Debug \
             -sdk iphonesimulator \
