@@ -15,7 +15,8 @@ workflows:
       - name: Install CocoaPods properly
         script: |
           cd ios
-          pod install --repo-update
+          pod repo update
+          pod install --verbose
           ls -la
           cd ..
 
@@ -23,7 +24,7 @@ workflows:
         script: |
           cd ios
           xcodebuild \
-            -workspace *.xcworkspace \
+            -workspace TempApp.xcworkspace \
             -scheme TempApp \
             -configuration Debug \
             -sdk iphonesimulator \
