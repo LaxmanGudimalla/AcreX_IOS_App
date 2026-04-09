@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "917598531171",
+    "project_id": "acrex-b2ad3",
+    "storage_bucket": "acrex-b2ad3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917598531171:android:8427357b5f52c622db9256",
+        "android_client_info": {
+          "package_name": "com.acrex.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSBeVh_hgo74e_7PmLPl1HoV_FzcdxLzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
