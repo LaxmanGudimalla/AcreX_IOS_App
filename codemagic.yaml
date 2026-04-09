@@ -8,17 +8,22 @@ workflows:
       xcode: latest
 
     scripts:
-      - name: Install dependencies
+      - name: Install npm dependencies
         script: |
           npm install
 
-      - name: Install CocoaPods
+      - name: Install CocoaPods (Fix workspace issue)
         script: |
           cd ios
-          pod install
+          rm -rf Pods Podfile.lock
+          pod install --repo-update
           cd ..
 
-      - name: Build iOS (Archive for TestFlight)
+      - name: Verify workspace exists (debug step)
+        script: |
+          ls ios
+
+      - name: Build iOS Archive
         script: |
           xcodebuild \
             -workspace ios/TempApp.xcworkspace \
@@ -27,5 +32,12 @@ workflows:
             -sdk iphoneos \
             -archivePath build/TempApp.xcarchive archive
 
+      - name: Export IPA
+        script: |
+          xcodebuild -exportArchive \
+            -archivePath build/TempApp.xcarchive \
+            -exportOptionsPlist ios/exportOptions.plist \
+            -exportPath build
+
     artifacts:
-      - build/TempApp.xcarchive
+      - build/*.ipa
