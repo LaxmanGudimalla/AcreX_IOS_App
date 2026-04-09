@@ -2,6 +2,7 @@ workflows:
   react-native-ios:
     name: React Native iOS Build
     max_build_duration: 60
+
     environment:
       node: 18
       xcode: latest
@@ -18,9 +19,16 @@ workflows:
           pod install
           cd ..
 
-      - name: Build iOS
+      - name: Build iOS (Simulator)
         script: |
-          npx react-native run-ios --simulator="iPhone 14"
+          cd ios
+          xcodebuild \
+            -workspace TempApp.xcworkspace \
+            -scheme TempApp \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            build
 
     artifacts:
-      - ios/build/**/*.ipa
+      - ios/build/**
