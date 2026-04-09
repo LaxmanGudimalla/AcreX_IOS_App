@@ -12,24 +12,20 @@ workflows:
         script: |
           npm install
 
-      - name: Install CocoaPods properly
+      - name: Install CocoaPods
         script: |
           cd ios
-          sudo gem install cocoapods
-          pod repo update
           pod install
           cd ..
 
-      - name: Build iOS (no Metro)
+      - name: Build iOS (Archive for TestFlight)
         script: |
-          cd ios
           xcodebuild \
-            -project TempApp.xcodeproj \
+            -workspace ios/TempApp.xcworkspace \
             -scheme TempApp \
-            -configuration Debug \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
-            build
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath build/TempApp.xcarchive archive
 
     artifacts:
-      - ios/build/**
+      - build/TempApp.xcarchive
